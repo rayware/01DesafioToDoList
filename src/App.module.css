@@ -44,6 +44,11 @@
     align-items: center;
     font-weight: 600;
     font-size: var(--size-2);
+    transition: background-color .3s;
+}
+
+.newTask button:hover{
+    background-color: var(--blue-500);
 }
 
 .newTask button>img {
@@ -107,65 +112,3 @@
 
 }
 
-.taskBox {
-    display: flex;
-    padding: 1rem;
-    column-gap: .75rem;
-    background-color: var(--gray-500);
-    border-radius: 8px;
-    border: 1px solid var(--gray-400);
-}
-
-.taskBox label {
-    display: flex;
-    gap: .75rem;
-    flex: 1;
-}
-
-.taskBox+.taskBox {
-    margin-top: .75rem;
-}
-
-.taskBox input[type=checkbox] {
-    display: none;
-}
-
-.trashTask svg {
-    padding: 6px;
-    box-sizing: content-box;
-    color: var(--gray-300);
-    border-radius: 4px;
-}
-
-.trashTask:hover svg {
-    color: var(--danger);
-    background-color: var(--gray-400);
-}
-
-.checkbox {
-    border-radius: 100%;
-    height: 1.125rem;
-    width: 1.125rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.checkboxFalse span{
-    border: 2px solid var(--blue-500);
-}
-
-.checkboxTrue{
-    border: 1px solid var(--gray-500);
-}
-.checkboxTrue span{
-    border: 2px solid var(--purple-500);
-    background-color: var(--purple-500);
-}
-
-.checkboxTrue p{
-    text-decoration: line-through;
-    color: var(--gray-300);
-}

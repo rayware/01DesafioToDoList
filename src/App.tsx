@@ -4,8 +4,8 @@ import styles from "./App.module.css"
 import logo from "./assets/logo.png"
 import clipBoard from "./assets/Clipboard.png"
 import plus from "./assets/plus.png"
-import { Check, Trash } from "@phosphor-icons/react";
 import { useState } from "react";
+import { Item } from "./components/Item";
 
 export interface toDoList {
   id: number;
@@ -18,7 +18,7 @@ export function App() {
   const [inputValue, setInputValue] = useState('')
 
   function addNewTask() {
-    if(!inputValue){
+    if (!inputValue) {
       return
     }
 
@@ -32,19 +32,19 @@ export function App() {
     setInputValue('')
   }
 
-  function handleToggleTask(id: number){
+  function handleToggleTask({ id, value }: { id: number; value: boolean }) {
     const updatedTaks = isToDoList.map((task) => {
       if (task.id === id) {
-        return {...task, check: !task.check }
+        return { ...task, check: value }
       }
 
-      return {...task}
+      return { ...task }
     })
 
     setIsToDoList(updatedTaks)
   }
 
-  function removeTask(id: number){
+  function removeTask(id: number) {
     const filterTask = isToDoList.filter((task) => task.id !== id)
 
     setIsToDoList(filterTask)
@@ -96,26 +96,13 @@ export function App() {
                 <div className={styles.list}>
                   {
                     isToDoList.map(list => {
-                      
-                      const toggleCheck = list.check 
-                      ? styles['checkboxTrue']
-                      : styles['checkboxFalse']
-
                       return (
-                        <>
-                          <div className={`${styles.taskBox} ${toggleCheck}`}>
-                            <label htmlFor="checkbox" onClick={() => handleToggleTask(list.id)}>
-                              <input readOnly type="checkbox" checked={list.check}/>
-                              <span className={styles.checkbox}>
-                                {list.check && <Check size={12} />}
-                              </span>
-                              <p>{list.content}</p>
-                            </label>
-                            <button onClick={() => removeTask(list.id)} title="Deletar Tarefa" className={styles.trashTask}>
-                              <Trash size={16} />
-                            </button>
-                          </div>
-                        </>
+                        <Item
+                          key={list.id}
+                          data={list}
+                          removeTask={removeTask}
+                          toggleTaskStatus={handleToggleTask}
+                        />
                       )
                     }
 
